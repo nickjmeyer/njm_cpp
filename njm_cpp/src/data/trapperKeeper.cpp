@@ -1,6 +1,6 @@
-#include "data/trapperKeeper.hpp"
+#include <njm_cpp/data/trapperKeeper.hpp>
 
-#include "info/project.hpp"
+#include <njm_cpp/info/project.hpp>
 
 #include <glog/logging.h>
 #include <unistd.h>

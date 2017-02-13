@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "tools/stats.hpp"
+#include <njm_cpp/tools/stats.hpp>
 
 namespace njm {
 namespace tools {

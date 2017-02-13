@@ -1,4 +1,4 @@
-#include "tools/experiment.hpp"
+#include <njm_cpp/tools/experiment.hpp>
 
 #include <glog/logging.h>
 #include <algorithm>

@@ -1,4 +1,4 @@
-#include "tools/random.hpp"
+#include <njm_cpp/tools/random.hpp>
 #include <glog/logging.h>
 #include <algorithm>
 

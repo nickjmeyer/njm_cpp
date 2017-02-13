@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "tools/bitManip.hpp"
-#include "tools/random.hpp"
+#include <njm_cpp/tools/bitManip.hpp>
+#include <njm_cpp/tools/random.hpp>
 
 namespace njm {
 namespace tools{

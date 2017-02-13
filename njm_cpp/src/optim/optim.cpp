@@ -1,4 +1,4 @@
-#include "optim/optim.hpp"
+#include <njm_cpp/optim/optim.hpp>
 
 namespace njm {
 namespace optim {

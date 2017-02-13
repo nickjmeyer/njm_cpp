@@ -1,5 +1,5 @@
-#include "optim/simPerturb.hpp"
-#include "linalg/stdVectorAlgebra.hpp"
+#include <njm_cpp/optim/simPerturb.hpp>
+#include <njm_cpp/linalg/stdVectorAlgebra.hpp>
 
 #include <iostream>
 #include <cmath>

@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
 
-#include "optim/simPerturb.hpp"
-#include "tools/random.hpp"
+#include <njm_cpp/optim/simPerturb.hpp>
+#include <njm_cpp/tools/random.hpp>
 
 #include <chrono>
 #include <thread>

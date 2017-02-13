@@ -2,8 +2,8 @@
 #include <glog/logging.h>
 #include <cstdint>
 #include <thread>
-#include "thread/pool.hpp"
-#include "data/result.hpp"
+#include <njm_cpp/thread/pool.hpp>
+#include <njm_cpp/data/result.hpp>
 
 namespace njm {
 namespace thread {

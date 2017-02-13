@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "data/trapperKeeper.hpp"
+#include <njm_cpp/data/trapperKeeper.hpp>
 
 
 namespace njm {

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "tools/progress.hpp"
+#include <njm_cpp/tools/progress.hpp>
 
 #include <sstream>
 #include <regex>

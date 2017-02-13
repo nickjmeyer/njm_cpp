@@ -1,4 +1,4 @@
-#include "info/project.hpp"
+#include <njm_cpp/info/project.hpp>
 
 namespace njm {
 namespace info {

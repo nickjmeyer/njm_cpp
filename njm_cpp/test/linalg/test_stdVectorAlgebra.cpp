@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "linalg/stdVectorAlgebra.hpp"
-#include "tools/random.hpp"
+#include <njm_cpp/linalg/stdVectorAlgebra.hpp>
+#include <njm_cpp/tools/random.hpp>
 
 namespace njm {
 namespace linalg {

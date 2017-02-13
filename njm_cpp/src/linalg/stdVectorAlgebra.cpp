@@ -1,4 +1,4 @@
-#include "linalg/stdVectorAlgebra.hpp"
+#include <njm_cpp/linalg/stdVectorAlgebra.hpp>
 #include <glog/logging.h>
 
 #include <cmath>

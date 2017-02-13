@@ -1,7 +1,7 @@
 #ifndef NJM_CPP_SIM_PERTURB_HPP
 #define NJM_CPP_SIM_PERTURB_HPP
 
-#include "optim.hpp"
+#include <njm_cpp/optim/optim.hpp>
 
 namespace njm {
 namespace optim {

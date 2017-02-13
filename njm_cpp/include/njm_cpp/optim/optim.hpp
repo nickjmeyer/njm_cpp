@@ -3,7 +3,7 @@
 
 #include <functional>
 #include <cstdint>
-#include "tools/random.hpp"
+#include <njm_cpp/tools/random.hpp>
 
 namespace njm {
 namespace optim {

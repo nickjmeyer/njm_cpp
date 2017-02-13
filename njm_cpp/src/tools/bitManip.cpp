@@ -1,4 +1,4 @@
-#include "tools/bitManip.hpp"
+#include <njm_cpp/tools/bitManip.hpp>
 #include <glog/logging.h>
 
 

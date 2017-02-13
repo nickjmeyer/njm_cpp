@@ -1,4 +1,4 @@
-#include "thread/pool.hpp"
+#include <njm_cpp/thread/pool.hpp>
 
 #include <thread>
 
