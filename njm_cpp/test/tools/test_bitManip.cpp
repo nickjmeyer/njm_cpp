@@ -3,7 +3,8 @@
 #include "tools/bitManip.hpp"
 #include "tools/random.hpp"
 
-namespace njm::tools {
+namespace njm {
+namespace tools{
 
 
 TEST(TestBitManip, ActiveSet) {
@@ -178,7 +179,8 @@ TEST(TestBitManip, TestReverseBits) {
 }
 
 
-} // namespace njm::tools
+} // namespace tools
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {
