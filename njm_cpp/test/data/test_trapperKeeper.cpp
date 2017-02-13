@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 #include <glog/logging.h>
-#include "trapperKeeper.hpp"
+#include "data/trapperKeeper.hpp"
 
 
-namespace stdmMf {
+namespace njm {
+namespace data {
+
 
 
 TEST(TestTrapperKeeper, FlushAndFinish) {
@@ -131,7 +133,8 @@ TEST(TestTrapperKeeper, Existing003) {
 
 
 
-} // namespace stdmMf
+} // namespace data
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

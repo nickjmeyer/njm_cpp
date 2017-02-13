@@ -52,9 +52,11 @@ set(NJM_CPP_SRCS
   src/optim/simPerturb.cpp
 
   ## thread
+  src/thread/pool.cpp
 
   ## tools
   src/tools/bitManip.cpp
+  src/tools/experiment.cpp
   src/tools/random.cpp
   src/tools/stats.cpp)
 
@@ -70,28 +72,31 @@ target_link_libraries(njm_cpp PRIVATE njm_cpp_boost njm_cpp_gsl njm_cpp_glog
 if(${NJM_CPP_BUILD_TESTS})
   set(NJM_CPP_TEST_SRCS
     ## data
-    test_trapperKeeper.cpp
+    test/data/test_trapperKeeper.cpp
 
     ## linalg
-    test_stdVectorAlgebra.cpp
+    test/linalg/test_stdVectorAlgebra.cpp
 
     ## optim
-    test_simPerturb.cpp
+    test/optim/test_simPerturb.cpp
 
     ## thread
-    test_pool.cpp
+    test/thread/test_pool.cpp
 
     ## tools
-    test_bitManip.cpp
-    test_experiment.cpp
-    test_progress.cpp
-    test_stats.cpp)
+    test/tools/test_bitManip.cpp
+    test/tools/test_experiment.cpp
+    test/tools/test_progress.cpp
+    test/tools/test_stats.cpp)
 
   foreach(test_src ${NJM_CPP_TEST_SRCS})
     get_filename_component(test_bin ${test_src} NAME_WE)
-    add_executable(${test_bin} test_src)
+    get_filename_component(test_dir ${test_src} DIRECTORY)
+    add_executable(${test_bin} ${test_src})
+    set_target_properties(${test_bin} PROPERTIES
+      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}")
     target_link_libraries(${test_bin} njm_cpp gtest)
-    add_test(${test_bin} ${test_bin})
+    add_test(${test_bin} "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/${test_bin}")
   endforeach(test_src)
 
 endif()

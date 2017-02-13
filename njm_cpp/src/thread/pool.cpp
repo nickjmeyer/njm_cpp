@@ -1,10 +1,9 @@
-#include "pool.hpp"
+#include "thread/pool.hpp"
 
 #include <thread>
 
 namespace njm {
 namespace thread {
-
 
 
 void Pool::worker_job() {

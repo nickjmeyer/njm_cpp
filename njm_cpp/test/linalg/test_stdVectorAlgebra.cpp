@@ -3,7 +3,9 @@
 #include "linalg/stdVectorAlgebra.hpp"
 #include "tools/random.hpp"
 
-namespace njm::linalg {
+namespace njm {
+namespace linalg {
+
 
 
 TEST(TestStdVectorAlgebra, VectorAddAAndB) {
@@ -223,7 +225,9 @@ TEST(TestStdVectorAlgebra, TestDotAAndB) {
 }
 
 
-} // namespace njm::linalg
+
+} // namespace linalg
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

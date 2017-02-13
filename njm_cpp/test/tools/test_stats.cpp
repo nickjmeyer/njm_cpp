@@ -2,7 +2,9 @@
 #include <glog/logging.h>
 #include "tools/stats.hpp"
 
-namespace njm::tools {
+namespace njm {
+namespace tools {
+
 
 
 TEST(TestStats, TestMeanAndVar) {
@@ -13,7 +15,8 @@ TEST(TestStats, TestMeanAndVar) {
 }
 
 
-} // namespace njm::tools
+} // namespace tools
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

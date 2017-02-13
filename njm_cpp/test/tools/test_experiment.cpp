@@ -2,7 +2,8 @@
 #include <glog/logging.h>
 #include "tools/experiment.hpp"
 
-namespace njm::tools {
+namespace njm {
+namespace tools {
 
 
 TEST(TestExperiment, IntAndDouble) {
@@ -152,7 +153,8 @@ TEST(TestExperiment, MultiGroupIntAndDouble) {
 }
 
 
-} // namespace njm::tools
+} // namespace tools
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

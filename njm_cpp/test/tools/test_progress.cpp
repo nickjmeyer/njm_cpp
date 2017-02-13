@@ -5,7 +5,9 @@
 #include <sstream>
 #include <regex>
 
-namespace njm::tools {
+namespace njm {
+namespace tools {
+
 
 TEST(TestProgress, TestNoTotal) {
     std::stringstream ss;
@@ -47,8 +49,8 @@ TEST(TestProgress, TestTotal2) {
 }
 
 
-
-} // namespace njm::tools
+} // namespace tools
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

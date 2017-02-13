@@ -2,10 +2,12 @@
 #include <glog/logging.h>
 #include <cstdint>
 #include <thread>
-#include "pool.hpp"
-#include "result.hpp"
+#include "thread/pool.hpp"
+#include "data/result.hpp"
 
-namespace stdmMf {
+namespace njm {
+namespace thread {
+
 
 TEST(TestPool, Counting) {
     const uint32_t num_threads = std::thread::hardware_concurrency();
@@ -14,12 +16,13 @@ TEST(TestPool, Counting) {
 
     const int32_t N = 1000 * num_threads;
 
-    std::vector<std::shared_ptr<Result<uint32_t> > > results;
+    std::vector<std::shared_ptr<data::Result<uint32_t> > > results;
     for (uint32_t i = 0; i < N; ++i) {
-        const std::shared_ptr<Result<uint32_t> > ptr(new Result<uint32_t>);
+        const std::shared_ptr<data::Result<uint32_t> > ptr(
+                new data::Result<uint32_t>);
         results.push_back(ptr);
-        p.service()->post(std::bind([](
-                                const std::shared_ptr<Result<uint32_t> > & r,
+        p.service()->post(std::bind(
+                        [](const std::shared_ptr<data::Result<uint32_t> > & r,
                                 const uint32_t & i) {
                             r->set(i);
                         }, ptr, i));
@@ -32,7 +35,9 @@ TEST(TestPool, Counting) {
     }
 }
 
-} // namespace coopPE
+
+} // namespace thread
+} // namespace njm
 
 
 int main(int argc, char *argv[]) {

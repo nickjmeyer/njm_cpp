@@ -5,11 +5,8 @@
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
 
-#include "tools/result.hpp"
-
 namespace njm {
 namespace thread {
-
 
 
 class Pool {
