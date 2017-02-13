@@ -21,7 +21,7 @@ if(${OpenBLAS_FOUND})
   target_include_directories(njm_cpp_blas INTERFACE ${OpenBLAS_INCLUDE_DIR})
 else()
   find_package(BLAS)
-  if (NOT ${OpenBLAS_FOUND})
+  if (NOT ${BLAS_FOUND})
     MESSAGE(FATAL_ERROR "BLAS is necessary.  If on OSX 'brew install openblas'."
       "  If on Ubuntu 'sudo apt install libopenblas-dev'.")
   endif()
