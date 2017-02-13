@@ -19,7 +19,6 @@ find_package(OpenBLAS)
 if(${OpenBLAS_FOUND})
   target_link_libraries(njm_cpp_blas INTERFACE ${OpenBLAS_LIB})
   target_include_directories(njm_cpp_blas INTERFACE ${OpenBLAS_INCLUDE_DIR})
-  MESSAGE(${OpenBLAS_INCLUDE_DIR})
 else()
   find_package(BLAS)
   if (NOT ${OpenBLAS_FOUND})
@@ -63,7 +62,6 @@ set(NJM_CPP_SRCS
 
 
 add_library(njm_cpp ${NJM_CPP_SRCS})
-MESSAGE("${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_include_directories(njm_cpp PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(njm_cpp PRIVATE njm_cpp_boost njm_cpp_gsl njm_cpp_glog
   njm_cpp_blas)
