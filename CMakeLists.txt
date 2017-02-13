@@ -8,8 +8,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ## add modules
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
-option(NJM_CPP_FORCE_BUILD_TEST "Build 'njm_cpp' test if not root project." NO)
-
 ## A flag to determine if tests are being built.  It can be enabled
 ## for a few different reasons.  This should not be manually set.  If
 ## you want to manually build tests, use the option
@@ -24,7 +22,7 @@ else()
   set(NJM_CPP_IS_ROOT_PROJECT NO)
 endif()
 
-## Setup testing
+## Setup testing (set NJM_CPP_FORCE_BUILD_TEST to always build tests)
 if(${NJM_CPP_IS_ROOT_PROJECT} OR ${NJM_CPP_FORCE_BUILD_TEST})
   enable_testing()
   set(NJM_CPP_BUILD_TESTS YES)
