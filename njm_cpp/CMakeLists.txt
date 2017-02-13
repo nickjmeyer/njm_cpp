@@ -92,12 +92,12 @@ if(${NJM_CPP_BUILD_TESTS})
   foreach(test_src ${NJM_CPP_TEST_SRCS})
     get_filename_component(test_bin ${test_src} NAME_WE)
     get_filename_component(test_dir ${test_src} DIRECTORY)
-    add_executable(${test_bin} ${test_src})
-    set_target_properties(${test_bin} PROPERTIES
+    add_executable(njm_cpp_${test_bin} ${test_src})
+    set_target_properties(njm_cpp_${test_bin} PROPERTIES
       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}")
-    target_link_libraries(${test_bin} njm_cpp gtest)
+    target_link_libraries(njm_cpp_${test_bin} njm_cpp gtest)
     add_test(njm_cpp_${test_bin}
-      "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/${test_bin}")
+      "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/njm_cpp_${test_bin}")
   endforeach(test_src)
 
 endif()

@@ -31,8 +31,6 @@ if(${NJM_CPP_IS_ROOT_PROJECT} OR ${NJM_CPP_FORCE_BUILD_TEST})
   MESSAGE("Building tests for njm_cpp.")
 
   if(NOT TARGET gtest) ## check if the target already exists
-    set(BUILD_GMOCK NO)
-    set(BUILD_GTEST YES)
     add_subdirectory(libs/googletest)
   endif()
 else()
