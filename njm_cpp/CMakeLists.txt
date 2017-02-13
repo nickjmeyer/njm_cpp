@@ -96,7 +96,8 @@ if(${NJM_CPP_BUILD_TESTS})
     set_target_properties(${test_bin} PROPERTIES
       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}")
     target_link_libraries(${test_bin} njm_cpp gtest)
-    add_test(${test_bin} "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/${test_bin}")
+    add_test(njm_cpp_${test_bin}
+      "${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/${test_bin}")
   endforeach(test_src)
 
 endif()
