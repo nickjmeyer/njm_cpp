@@ -1,4 +1,5 @@
 #include <njm_cpp/tools/stats.hpp>
+#include <cstdint>
 
 
 namespace njm {
