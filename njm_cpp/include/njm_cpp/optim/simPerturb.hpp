@@ -33,7 +33,7 @@ public:
 
     SimPerturb(const SimPerturb & other) = delete;
 
-    Optim::ErrorCode step();
+    ErrorCode step();
 };
 
 

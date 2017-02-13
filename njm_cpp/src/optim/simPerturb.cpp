@@ -23,7 +23,7 @@ SimPerturb::SimPerturb(
       min_step_size_(min_step_size) {
 }
 
-Optim::ErrorCode SimPerturb::step() {
+ErrorCode SimPerturb::step() {
     const double scale = this->c_ /
         std::pow(this->completed_steps_ + 1, this->t_);
 
@@ -72,11 +72,11 @@ Optim::ErrorCode SimPerturb::step() {
 
     if (std::any_of(this->par_.begin(), this->par_.end(),
                     [](const double & x) { return !std::isfinite(x);})) {
-        return Optim::NON_FINITE_PARAMETER;
+        return NON_FINITE_PARAMETER;
     } else if (step_size < this->min_step_size_) {
-        return Optim::SUCCESS;
+        return SUCCESS;
     } else {
-        return Optim::CONTINUE;
+        return CONTINUE;
     }
 }
 

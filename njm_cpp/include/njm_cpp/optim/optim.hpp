@@ -8,6 +8,7 @@
 namespace njm {
 namespace optim {
 
+enum ErrorCode {SUCCESS, CONTINUE, ERROR, NON_FINITE_PARAMETER};
 
 class Optim : public tools::RngClass {
 protected:
@@ -25,8 +26,6 @@ protected:
 
 
 public:
-    enum ErrorCode {SUCCESS, CONTINUE, ERROR, NON_FINITE_PARAMETER};
-
     Optim(const std::function<double(const std::vector<double> & ,
                     void * const)> & f,
             const std::vector<double> & par,
@@ -41,7 +40,7 @@ public:
     uint32_t completed_steps() const;
 
 
-    virtual Optim::ErrorCode step() = 0;
+    virtual ErrorCode step() = 0;
 };
 
 

@@ -33,11 +33,11 @@ TEST(TestSimPerturb, IndependentQuadratic) {
     }
     SimPerturb sp(f, start, NULL, 2.0, 0.15, 1.0, 1, 0.8, 0.0001);
 
-    Optim::ErrorCode ec;
+    ErrorCode ec;
     do {
         ec = sp.step();
-    } while(ec == Optim::ErrorCode::CONTINUE);
-    CHECK_EQ(ec, Optim::ErrorCode::SUCCESS);
+    } while(ec == ErrorCode::CONTINUE);
+    CHECK_EQ(ec, ErrorCode::SUCCESS);
 
     const std::vector<double> par = sp.par();
     for (uint32_t i = 0; i < n; ++i) {
