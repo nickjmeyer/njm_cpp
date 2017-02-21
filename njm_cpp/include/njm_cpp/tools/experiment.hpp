@@ -12,11 +12,12 @@ namespace tools {
 class Experiment {
 public:
     struct FactorLevel {
-        enum Type {is_int, is_double};
+        enum Type {is_int, is_double, is_bool};
         Type type;
         union {
             int int_val;
             double double_val;
+            bool bool_val;
         } val;
 
         friend std::ostream& operator<<(std::ostream& os,
@@ -25,6 +26,8 @@ public:
                 os << c.val.int_val;
             } else if (c.type == is_double) {
                 os << c.val.double_val;
+            } else if (c.type == is_bool) {
+                os << c.val.bool_val;
             } else {
                 LOG(FATAL) << "unhandled FactorLevel::Type " << c.type;
             }
@@ -54,6 +57,8 @@ public:
         void add_factor(const std::vector<int> & factor);
 
         void add_factor(const std::vector<double> & factor);
+
+        void add_factor(const std::vector<bool> & factor);
     };
 
 protected:

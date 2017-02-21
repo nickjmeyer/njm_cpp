@@ -81,6 +81,61 @@ TEST(TestExperiment, IntAndDouble) {
 }
 
 
+TEST(TestExperiment, IntAndBool) {
+
+    Experiment e;
+    Experiment::FactorGroup * g = e.add_group();
+    g->add_factor(std::vector<int>({-1, 0, 1}));
+    g->add_factor(std::vector<bool>({true, false}));
+
+    e.start();
+    Experiment::Factor f;
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, -1);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, true);
+
+    ASSERT_TRUE(e.next());
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, 0);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, true);
+
+    ASSERT_TRUE(e.next());
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, 1);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, true);
+
+    ASSERT_TRUE(e.next());
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, -1);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, false);
+
+    ASSERT_TRUE(e.next());
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, 0);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, false);
+
+    ASSERT_TRUE(e.next());
+    f = e.get();
+    EXPECT_EQ(f.at(0).type, Experiment::FactorLevel::Type::is_int);
+    EXPECT_EQ(f.at(0).val.int_val, 1);
+    EXPECT_EQ(f.at(1).type, Experiment::FactorLevel::Type::is_bool);
+    EXPECT_EQ(f.at(1).val.bool_val, false);
+
+
+    ASSERT_TRUE(!e.next());
+}
+
+
 TEST(TestExperiment, MultiGroupIntAndDouble) {
     Experiment e;
     Experiment::FactorGroup * g0 = e.add_group();

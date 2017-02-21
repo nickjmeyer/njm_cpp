@@ -107,5 +107,22 @@ void Experiment::FactorGroup::add_factor(const std::vector<double> & vals) {
 }
 
 
+void Experiment::FactorGroup::add_factor(const std::vector<bool> & vals) {
+    const uint32_t size = vals.size();
+    CHECK_GT(size, 0);
+    Factor new_f;
+    for (uint32_t i = 0; i < size; ++i) {
+        FactorLevel fl;
+        fl.type = FactorLevel::Type::is_bool;
+        fl.val.bool_val = vals.at(i);
+
+        new_f.push_back(fl);
+    }
+    this->factors_.push_back(new_f);
+    ++this->n_factors_;
+    this->n_levels_.push_back(size);
+}
+
+
 } // namespace tools
 } // namespace njm
