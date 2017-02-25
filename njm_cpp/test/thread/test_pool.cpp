@@ -21,7 +21,7 @@ TEST(TestPool, Counting) {
         const std::shared_ptr<data::Result<uint32_t> > ptr(
                 new data::Result<uint32_t>);
         results.push_back(ptr);
-        p.service()->post(std::bind(
+        p.service().post(std::bind(
                         [](const std::shared_ptr<data::Result<uint32_t> > & r,
                                 const uint32_t & i) {
                             r->set(i);
