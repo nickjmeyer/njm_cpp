@@ -99,11 +99,11 @@ RngClass::RngClass(const RngClass & other)
     this->seed(other.seed());
 }
 
-void RngClass::rng(std::shared_ptr<Rng> rng) {
+void RngClass::rng(const std::shared_ptr<Rng> & rng) {
     this->rng_ = rng;
 }
 
-std::shared_ptr<Rng> RngClass::rng() {
+const std::shared_ptr<Rng> & RngClass::rng() const {
     return this->rng_;
 }
 

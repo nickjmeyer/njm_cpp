@@ -66,9 +66,12 @@ protected:
     RngClass(const RngClass & other);
 
 public:
-    void rng(std::shared_ptr<Rng> rng);
-    std::shared_ptr<Rng> rng();
+    virtual void rng(const std::shared_ptr<Rng> & rng) = 0;
+
+    const std::shared_ptr<Rng> & rng() const;
+
     void seed(uint32_t seed);
+
     uint32_t seed() const;
 };
 
