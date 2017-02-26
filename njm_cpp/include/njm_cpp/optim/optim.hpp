@@ -41,6 +41,8 @@ public:
 
 
     virtual ErrorCode step() = 0;
+
+    virtual void rng(const std::shared_ptr<tools::Rng> & rng) override;
 };
 
 

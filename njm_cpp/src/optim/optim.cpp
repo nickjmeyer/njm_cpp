@@ -26,6 +26,10 @@ uint32_t Optim::completed_steps() const {
 }
 
 
+void Optim::rng(const std::shared_ptr<tools::Rng> & rng) {
+    this->RngClass::rng(rng);
+}
+
 
 } // namespace optim
 } // namespace njm
