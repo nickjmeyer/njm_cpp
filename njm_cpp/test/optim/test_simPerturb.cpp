@@ -17,7 +17,7 @@ TEST(TestSimPerturb, IndependentQuadratic) {
     const uint32_t n = 5;
     const std::vector<double> truth = {1., 2., 3., 4., 5.};
     auto f = [&n, &rng, &truth] (const std::vector<double> & par,
-            void * const data)
+            const std::vector<double> & par_orig) -> double
         {
             double res = 0.0;
             for (uint32_t i = 0; i < n; ++i) {
@@ -31,7 +31,8 @@ TEST(TestSimPerturb, IndependentQuadratic) {
     for (uint32_t i = 0; i < n; ++i) {
         start.push_back(rng.rnorm(-10, 1));
     }
-    SimPerturb sp(f, start, NULL, 2.0, 0.15, 1.0, 1, 0.8, 0.0001);
+
+    SimPerturb sp(f, start, 2.0, 0.15, 1.0, 1, 0.8, 0.0001);
 
     ErrorCode ec;
     do {

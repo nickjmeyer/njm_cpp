@@ -47,7 +47,6 @@ set(NJM_CPP_SRCS
   src/linalg/stdVectorAlgebra.cpp
 
   ## optim
-  src/optim/optim.cpp
   src/optim/simPerturb.cpp
 
   ## thread

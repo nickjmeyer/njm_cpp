@@ -8,7 +8,7 @@ namespace optim {
 
 
 
-class SimPerturb : public Optim {
+class SimPerturb : public Optim<const std::vector<double> & > {
 private:
     const double c_;
     const double t_;
@@ -21,9 +21,8 @@ private:
 
 public:
     SimPerturb(const std::function<double(const std::vector<double> & ,
-                    void * const)> & f,
+                    const std::vector<double> &)> & f,
             const std::vector<double> & par,
-            void * const data,
             const double & c,
             const double & t,
             const double & a,

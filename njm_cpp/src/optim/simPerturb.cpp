@@ -10,18 +10,18 @@ namespace optim {
 
 SimPerturb::SimPerturb(
         const std::function<double(const std::vector<double> & ,
-                void * const)> & f,
+                const std::vector<double> &)> & f,
         const std::vector<double> & par,
-        void * const data,
         const double & c,
         const double & t,
         const double & a,
         const double & b,
         const double & ell,
         const double & min_step_size)
-    : Optim(f, par, data), c_(c), t_(t), a_(a), b_(b), ell_(ell),
-      min_step_size_(min_step_size) {
+    : Optim<const std::vector<double> & >(f, par),
+    c_(c), t_(t), a_(a), b_(b), ell_(ell), min_step_size_(min_step_size) {
 }
+
 
 ErrorCode SimPerturb::step() {
     const double scale = this->c_ /
@@ -42,8 +42,8 @@ ErrorCode SimPerturb::step() {
     const std::vector<double> par_minus = linalg::add_a_and_b(this->par(),
             linalg::mult_a_and_b(perturb, -1.));
 
-    const double val_plus = this->f_(par_plus, this->data_);
-    const double val_minus = this->f_(par_minus, this->data_);
+    const double val_plus = this->f_(par_plus, this->par());
+    const double val_minus = this->f_(par_minus, this->par());
 
     // estimate gradient
     const std::vector<double> grad_est = linalg::recip_of(linalg::mult_a_and_b(
@@ -60,7 +60,7 @@ ErrorCode SimPerturb::step() {
 
     if (this->verbose_) {
         // evaluate and print
-        const double val = this->f_(this->par_, this->data_);
+        const double val = this->f_(this->par_, this->par_);
         std::cout << "iter: " << this->completed_steps_ << std::endl;
         std::cout << "par:";
         for (uint32_t i = 0; i < this->par_.size(); ++i) {
@@ -79,7 +79,6 @@ ErrorCode SimPerturb::step() {
         return CONTINUE;
     }
 }
-
 
 } // namespace optim
 } // namespace njm

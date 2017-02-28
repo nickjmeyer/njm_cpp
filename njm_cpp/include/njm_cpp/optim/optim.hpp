@@ -10,15 +10,14 @@ namespace optim {
 
 enum ErrorCode {SUCCESS, CONTINUE, ERROR, NON_FINITE_PARAMETER};
 
+template <typename... Args>
 class Optim : public tools::RngClass {
 protected:
-    const std::function<double(const std::vector<double> & , void * const)> f_;
+    const std::function<double(const std::vector<double> &, Args...)> f_;
 
     std::vector<double> par_;
 
     const uint32_t par_size_;
-
-    void * const data_;
 
     uint32_t completed_steps_;
 
@@ -26,23 +25,32 @@ protected:
 
 
 public:
-    Optim(const std::function<double(const std::vector<double> & ,
-                    void * const)> & f,
-            const std::vector<double> & par,
-            void * const data);
+    Optim(const std::function<double(const std::vector<double> &, Args...)> & f,
+            const std::vector<double> & par)
+        : f_(f), par_(par), par_size_(par.size()),
+          completed_steps_(0), verbose_(false) {
+    }
 
     Optim(const Optim & other) = delete;
 
-    void verbose(const bool & verbose);
+    void verbose(const bool & verbose) {
+        this->verbose_ = verbose;
+    }
 
-    std::vector<double> par() const;
+    std::vector<double> par() const {
+        return this->par_;
+    }
 
-    uint32_t completed_steps() const;
+    uint32_t completed_steps() const {
+        return this->completed_steps_;
+    }
 
 
     virtual ErrorCode step() = 0;
 
-    virtual void rng(const std::shared_ptr<tools::Rng> & rng) override;
+    virtual void rng(const std::shared_ptr<tools::Rng> & rng) override {
+        this->RngClass::rng(rng);
+    }
 };
 
 
