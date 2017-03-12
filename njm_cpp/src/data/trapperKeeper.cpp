@@ -61,15 +61,6 @@ Entry::Entry(const boost::filesystem::path & path)
 }
 
 
-Entry::Entry(const Entry & other)
-    : path_(other.path_) {
-    // protect writing data
-    std::lock(this->mutex_, other.mutex_);
-    std::lock_guard<std::mutex> this_lock(this->mutex_, std::adopt_lock);
-    std::lock_guard<std::mutex> other_lock(other.mutex_, std::adopt_lock);
-    this->content_ << other.content_.str();
-}
-
 boost::filesystem::path Entry::path() {
     return this->path_;
 }
@@ -94,16 +85,16 @@ TrapperKeeper::TrapperKeeper(const std::string & name,
 #endif
 
     // create readme entry
-    Entry& readme = this->entry("README.txt");
-    readme << "date: " << date_ << "\n";
+    Entry * readme = this->entry("README.txt");
+    *readme << "date: " << date_ << "\n";
     if (host_not_found) {
-        readme << "host: " << "anonymous" << "\n";
+        *readme << "host: " << "anonymous" << "\n";
     } else {
-        readme << "host: " << hostname << "\n";
+        *readme << "host: " << hostname << "\n";
     }
-    readme << "host: " << hostname << "\n"
-           << "git-SHA-1: " << njm::info::project::GIT_SHA1 << "\n"
-           << "name: " << name << "\n";
+    *readme << "host: " << hostname << "\n"
+            << "git-SHA-1: " << njm::info::project::GIT_SHA1 << "\n"
+            << "name: " << name << "\n";
 }
 
 TrapperKeeper::~TrapperKeeper() {
@@ -201,13 +192,13 @@ void TrapperKeeper::wipe_no_lock() {
 }
 
 
-Entry & TrapperKeeper::entry(const boost::filesystem::path & entry_path) {
+Entry * TrapperKeeper::entry(const boost::filesystem::path & entry_path) {
     std::lock_guard<std::mutex> lock(this->mutex_);
     CHECK(!this->wiped_);
     // return reference if exists, if not then create and return
     // reference
-    this->entries_.emplace_back(Entry(this->temp_ / entry_path));
-    return this->entries_.back();
+    this->entries_.emplace_back(this->temp_ / entry_path);
+    return &this->entries_.back();
 }
 
 void TrapperKeeper::flush() {

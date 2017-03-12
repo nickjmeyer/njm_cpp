@@ -37,7 +37,7 @@ protected:
 
 public:
     Entry(const boost::filesystem::path & path);
-    Entry(const Entry & other);
+    Entry(const Entry & other) = delete;
 
     boost::filesystem::path path();
 
@@ -84,7 +84,7 @@ public:
 
     void wipe();
 
-    Entry& entry(const boost::filesystem::path & entry_path);
+    Entry * entry(const boost::filesystem::path & entry_path);
 
     void flush();
 };

@@ -30,9 +30,9 @@ TEST(TestTrapperKeeper, FlushAndFinish) {
     const boost::filesystem::path file2 = "dir2/file2.txt";
     const boost::filesystem::path file3 = "dir2/dir3/file3.txt";
 
-    tk.entry(file1) << "hello" << "\n" << "world";
-    tk.entry(file2) << "goodbye" << "\n" << "world";
-    tk.entry(file3) << "hello" << "\n" << "again";
+    *tk.entry(file1) << "hello" << "\n" << "world";
+    *tk.entry(file2) << "goodbye" << "\n" << "world";
+    *tk.entry(file3) << "hello" << "\n" << "again";
     tk.flush();
 
     EXPECT_TRUE(boost::filesystem::exists(temp / file1))
