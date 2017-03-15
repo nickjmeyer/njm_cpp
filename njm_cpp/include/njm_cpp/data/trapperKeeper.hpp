@@ -43,6 +43,7 @@ public:
 
     template<class T>
     Entry& operator<<(const T & new_content) {
+        std::lock_guard<std::mutex> lock(this->mutex_);
         this->content_ << new_content;
         return *this;
     }
