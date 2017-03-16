@@ -31,15 +31,22 @@ public:
           completed_steps_(0), verbose_(false) {
     }
 
+
     Optim(const Optim & other) = delete;
+
 
     void verbose(const bool & verbose) {
         this->verbose_ = verbose;
     }
 
+
     std::vector<double> par() const {
         return this->par_;
     }
+
+
+    virtual double obj_fn() = 0;
+
 
     uint32_t completed_steps() const {
         return this->completed_steps_;
@@ -47,6 +54,7 @@ public:
 
 
     virtual ErrorCode step() = 0;
+
 
     virtual void rng(const std::shared_ptr<tools::Rng> & rng) override {
         this->RngClass::rng(rng);
