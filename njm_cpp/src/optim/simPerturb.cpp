@@ -60,7 +60,7 @@ ErrorCode SimPerturb::step() {
 
     if (this->verbose_) {
         // evaluate and print
-        const double val = this->f_(this->par_, this->par_);
+        const double val = this->obj_fn();
         std::cout << "iter: " << this->completed_steps_ << std::endl;
         std::cout << "par:";
         for (uint32_t i = 0; i < this->par_.size(); ++i) {
@@ -79,6 +79,12 @@ ErrorCode SimPerturb::step() {
         return CONTINUE;
     }
 }
+
+
+double SimPerturb::obj_fn() {
+    return this->f_(this->par_, this->par_);
+}
+
 
 } // namespace optim
 } // namespace njm

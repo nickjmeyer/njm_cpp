@@ -33,6 +33,8 @@ public:
     SimPerturb(const SimPerturb & other) = delete;
 
     ErrorCode step() override;
+
+    double obj_fn() override;
 };
 
 
