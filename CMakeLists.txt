@@ -22,6 +22,12 @@ else()
   set(NJM_CPP_IS_ROOT_PROJECT NO)
 endif()
 
+## check for a force build for tests
+if(DEFINED NJM_CPP_FORCE_BUILD_TEST)
+else()
+  set(NJM_CPP_FORCE_BUILD_TEST YES)
+endif()
+
 ## Setup testing (set NJM_CPP_FORCE_BUILD_TEST to always build tests)
 if(${NJM_CPP_IS_ROOT_PROJECT} OR ${NJM_CPP_FORCE_BUILD_TEST})
   enable_testing()
