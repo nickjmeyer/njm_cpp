@@ -1,5 +1,5 @@
-#ifndef NJM_CPP_UTILITIES_HPP
-#define NJM_CPP_UTILITIES_HPP
+#ifndef NJM_CPP_STD_VECTOR_ALGEBRA_HPP
+#define NJM_CPP_STD_VECTOR_ALGEBRA_HPP
 
 #include <vector>
 #include <boost/dynamic_bitset.hpp>
@@ -47,4 +47,4 @@ std::vector<double> recip_of(const std::vector<double> & a);
 } // namespace njm
 
 
-#endif // NJM_CPP_UTILITIES_HPP
+#endif // NJM_CPP_STD_VECTOR_ALGEBRA_HPP
