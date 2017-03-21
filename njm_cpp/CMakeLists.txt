@@ -40,6 +40,9 @@ set(NJM_CPP_SRCS
   ## data
   src/data/trapperKeeper.cpp
 
+  ## fn_approx
+  src/fun_approx/bsplines.cpp
+
   ## info
   ${CMAKE_CURRENT_BINARY_DIR}/src/info/project.cpp
 
