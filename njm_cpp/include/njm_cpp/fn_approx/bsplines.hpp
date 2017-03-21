@@ -1,0 +1,6 @@
+#ifndef NJM_CPP_B_SPLINES_HPP
+#define NJM_CPP_B_SPLINES_HPP
+
+
+
+#endif // NJM_CPP_B_SPLINES_HPP
