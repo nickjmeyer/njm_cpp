@@ -13,7 +13,6 @@ Rng::Rng()
               boost::random::uniform_real_distribution<double>(0., 1.)),
       dis_rnorm_01_(this->gen_,
               boost::random::normal_distribution<double>(0., 1.)) {
-    this->seed(0);
 }
 
 void Rng::seed(const uint32_t seed) {
