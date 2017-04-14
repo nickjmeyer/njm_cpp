@@ -10,7 +10,8 @@ namespace optim {
 
 enum ErrorCode {SUCCESS, CONTINUE, ERROR,
                 NON_FINITE_PARAMETER, NAN_PARAMETER,
-                STARTING_NON_FINITE_PARAMETER, STARTING_NAN_PARAMETER};
+                STARTING_NON_FINITE_PARAMETER, STARTING_NAN_PARAMETER,
+                NON_FINITE_GRADIENT, NAN_GRADIENT};
 
 template <typename... Args>
 class Optim : public tools::RngClass {
