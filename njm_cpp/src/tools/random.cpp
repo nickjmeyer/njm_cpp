@@ -13,6 +13,8 @@ Rng::Rng()
 
 void Rng::seed(const uint32_t seed) {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
+    this->dis_runif_01_.reset();
+    this->dis_rnorm_01_.reset();
     this->seed_ = seed;
     this->gen_.seed(seed);
 }
