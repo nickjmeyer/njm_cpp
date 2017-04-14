@@ -84,6 +84,7 @@ if(${NJM_CPP_BUILD_TESTS})
     test/tools/test_bitManip.cpp
     test/tools/test_experiment.cpp
     test/tools/test_progress.cpp
+    test/tools/test_random.cpp
     test/tools/test_stats.cpp)
 
   foreach(test_src ${NJM_CPP_TEST_SRCS})
