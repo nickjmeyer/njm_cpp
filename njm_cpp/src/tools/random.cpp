@@ -41,8 +41,10 @@ double Rng::runif_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     static uint32_t count = 0;
     ++count;
-    std::cout << "runif count: " << count << std::endl;
-    return this->dis_runif_01_(this->gen_);
+    const double draw(this->dis_runif_01_(this->gen_));
+    std::cout << "runif count: " << count
+              << "  (" << draw << ")" << std::endl;
+    return draw;
 }
 
 
@@ -50,9 +52,10 @@ double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     static uint32_t count = 0;
     ++count;
-    std::cout << "rnorm count: " << count << std::endl;
+    std::cout << "rnorm count: " << count;
     if (this->has_next_rnorm_) {
         this->has_next_rnorm_ = false;
+        std::cout << "  (" << this->next_rnorm_01_ << ")" << std::endl;
         return this->next_rnorm_01_;
     } else {
         const double u1(this->dis_runif_01_(this->gen_));
@@ -60,7 +63,9 @@ double Rng::rnorm_01() {
         const double a(std::sqrt(-2.0 * std::log(u1)));
         this->has_next_rnorm_ = true;
         this->next_rnorm_01_ = a * std::cos(6.28318530718 * u2);
-        return a * std::sin(6.28318530718 * u2);
+        const double draw(a * std::sin(6.28318530718 * u2));
+        std::cout << "  (" << draw << ")" << std::endl;
+        return draw;
     }
 }
 
