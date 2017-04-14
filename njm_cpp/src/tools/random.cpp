@@ -10,7 +10,8 @@ namespace tools {
 
 Rng::Rng()
     : gen_(0), seed_(0), dis_runif_01_(0., 1.),
-      has_next_rnorm_(false), next_rnorm_01_(0.0) {
+      has_next_rnorm_(false), next_rnorm_01_(0.0),
+      runif_count_(0), rnorm_count_(0) {
 }
 
 void Rng::seed(const uint32_t seed) {
@@ -39,10 +40,9 @@ void Rng::gen(const std::mt19937 & gen) {
 
 double Rng::runif_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    static uint32_t count = 0;
-    ++count;
+    ++this->runif_count_;
     const double draw(this->dis_runif_01_(this->gen_));
-    std::cout << "runif count: " << count
+    std::cout << "runif count: " << this->runif_count_
               << "  (" << draw
               << ", " << this->seed_
               << ", " << this << ")" << std::endl;
@@ -52,9 +52,8 @@ double Rng::runif_01() {
 
 double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    static uint32_t count = 0;
-    ++count;
-    std::cout << "rnorm count: " << count;
+    ++this->rnorm_count_;
+    std::cout << "rnorm count: " << this->rnorm_count_;
     if (this->has_next_rnorm_) {
         this->has_next_rnorm_ = false;
         std::cout << "  (" << this->next_rnorm_01_

@@ -22,6 +22,9 @@ private:
 
     mutable std::mutex gen_mutex_;
 
+    uint32_t runif_count_;
+    uint32_t rnorm_count_;
+
 public:
     Rng();
     Rng(const Rng & other) = delete;
