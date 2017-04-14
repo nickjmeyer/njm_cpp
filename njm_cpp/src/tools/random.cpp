@@ -8,17 +8,13 @@ namespace tools {
 
 
 Rng::Rng()
-    : gen_(0), seed_(0),
-      dis_runif_01_(this->gen_,
-              boost::random::uniform_real_distribution<double>(0., 1.)),
-      dis_rnorm_01_(this->gen_,
-              boost::random::normal_distribution<double>(0., 1.)) {
+    : gen_(0), seed_(0), dis_runif_01_(0., 1.), dis_rnorm_01_(0., 1.) {
 }
 
 void Rng::seed(const uint32_t seed) {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    this->dis_runif_01_.distribution().reset();
-    this->dis_rnorm_01_.distribution().reset();
+    this->dis_runif_01_.reset();
+    this->dis_rnorm_01_.reset();
     this->seed_ = seed;
     this->gen_.seed(seed);
 }
@@ -29,25 +25,25 @@ uint32_t Rng::seed() const {
     return this->seed_;
 }
 
-boost::mt19937 & Rng::gen() {
+std::mt19937 & Rng::gen() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     return this->gen_;
 }
 
-void Rng::gen(const boost::mt19937 & gen) {
+void Rng::gen(const std::mt19937 & gen) {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     this->gen_ = gen;
 }
 
 double Rng::runif_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    return this->dis_runif_01_();
+    return this->dis_runif_01_(this->gen_);
 }
 
 
 double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    return this->dis_rnorm_01_();
+    return this->dis_rnorm_01_(this->gen_);
 }
 
 double Rng::rnorm(const double mu, const double sigma) {
@@ -92,7 +88,7 @@ std::vector<int> Rng::sample_range(const int a, const int b, const int n) {
 
 void Rng::shuffle(std::vector<uint32_t> & x) {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    // std::shuffle(x.begin(), x.end(), this->gen_);
+    std::shuffle(x.begin(), x.end(), this->gen_);
 }
 
 
