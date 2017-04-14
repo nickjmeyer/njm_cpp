@@ -43,7 +43,9 @@ double Rng::runif_01() {
     ++count;
     const double draw(this->dis_runif_01_(this->gen_));
     std::cout << "runif count: " << count
-              << "  (" << draw << ")" << std::endl;
+              << "  (" << draw
+              << ", " << this->seed_
+              << ", " << this << ")" << std::endl;
     return draw;
 }
 
@@ -55,7 +57,9 @@ double Rng::rnorm_01() {
     std::cout << "rnorm count: " << count;
     if (this->has_next_rnorm_) {
         this->has_next_rnorm_ = false;
-        std::cout << "  (" << this->next_rnorm_01_ << ")" << std::endl;
+        std::cout << "  (" << this->next_rnorm_01_
+                  << ", " << this->seed_
+                  << ", " << this << ")" << std::endl;
         return this->next_rnorm_01_;
     } else {
         const double u1(this->dis_runif_01_(this->gen_));
@@ -64,7 +68,9 @@ double Rng::rnorm_01() {
         this->has_next_rnorm_ = true;
         this->next_rnorm_01_ = a * std::cos(6.28318530718 * u2);
         const double draw(a * std::sin(6.28318530718 * u2));
-        std::cout << "  (" << draw << ")" << std::endl;
+        std::cout << "  (" << draw
+                  << ", " << this->seed_
+                  << ", " << this << ")" << std::endl;
         return draw;
     }
 }
