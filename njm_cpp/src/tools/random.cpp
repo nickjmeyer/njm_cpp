@@ -1,7 +1,6 @@
 #include <njm_cpp/tools/random.hpp>
 #include <glog/logging.h>
 #include <algorithm>
-#include <iostream>
 
 namespace njm {
 namespace tools {
