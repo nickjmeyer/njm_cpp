@@ -128,7 +128,15 @@ std::vector<int> Rng::sample_range(const int a, const int b, const int n) {
 void Rng::shuffle(std::vector<uint32_t> & x) {
     std::cout << "CALL: " << __FUNCTION__ << " (" << this << ")" << std::endl;
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    std::shuffle(x.begin(), x.end(), this->gen_);
+    const uint32_t x_size(x.size());
+    for (uint32_t i = 0; i < (x_size - 1); ++i) {
+        const uint32_t draw_index(static_cast<uint32_t>(this->rint(i, x_size)));
+        if (draw_index != i) {
+            const double i_val(x.at(i));
+            x.at(i) = x.at(draw_index);
+            x.at(draw_index) = i_val;
+        }
+    }
 }
 
 
