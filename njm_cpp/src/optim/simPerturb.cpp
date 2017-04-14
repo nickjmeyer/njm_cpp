@@ -56,6 +56,13 @@ ErrorCode SimPerturb::step() {
     // estimate gradient
     const std::vector<double> grad_est = linalg::recip_of(linalg::mult_a_and_b(
                     perturb, 2.0 / (val_plus - val_minus)));
+    if (std::any_of(grad_est.begin(), grad_est.end(),
+                    [] (const double & x) {return std::isnan(x);})) {
+        return NAN_GRADIENT;
+    } else if (std::any_of(grad_est.begin(), grad_est.end(),
+                    [] (const double & x) {return !std::isfinite(x);})) {
+        return NON_FINITE_GRADIENT;
+    }
 
 
     const double step_size = this->a_ /
