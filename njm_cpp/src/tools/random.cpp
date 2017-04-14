@@ -1,6 +1,7 @@
 #include <njm_cpp/tools/random.hpp>
 #include <glog/logging.h>
 #include <algorithm>
+#include <iostream>
 
 namespace njm {
 namespace tools {
@@ -38,12 +39,18 @@ void Rng::gen(const std::mt19937 & gen) {
 
 double Rng::runif_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
+    static uint32_t count = 0;
+    ++count;
+    std::cout << "runif count: " << count << std::endl;
     return this->dis_runif_01_(this->gen_);
 }
 
 
 double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
+    static uint32_t count = 0;
+    ++count;
+    std::cout << "rnorm count: " << count << std::endl;
     if (this->has_next_rnorm_) {
         this->has_next_rnorm_ = false;
         return this->next_rnorm_01_;
