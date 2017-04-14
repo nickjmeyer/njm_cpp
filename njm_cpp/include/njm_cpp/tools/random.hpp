@@ -1,10 +1,13 @@
 #ifndef NJM_CPP_RANDOM_HPP
 #define NJM_CPP_RANDOM_HPP
 
-#include <random>
 #include <memory>
 #include <cstdint>
 #include <mutex>
+#include <boost/random/uniform_real_distribution.hpp>
+#include <boost/random/normal_distribution.hpp>
+#include <boost/random/variate_generator.hpp>
+#include <boost/random/mersenne_twister.hpp>
 
 namespace njm {
 namespace tools {
@@ -12,9 +15,13 @@ namespace tools {
 
 class Rng {
 private:
-    std::mt19937 gen_;
-    std::uniform_real_distribution<double> dis_runif_01_;
-    std::normal_distribution<double> dis_rnorm_01_;
+    boost::mt19937 gen_;
+    boost::variate_generator<boost::mt19937 &,
+                             boost::random::uniform_real_distribution<double> >
+    dis_runif_01_;
+    boost::variate_generator<boost::mt19937 &,
+                             boost::random::normal_distribution<double> >
+    dis_rnorm_01_;
     uint32_t seed_;
 
     mutable std::mutex gen_mutex_;
@@ -29,10 +36,10 @@ public:
     uint32_t seed() const;
 
     // get the generator
-    std::mt19937 & gen();
+    boost::mt19937 & gen();
 
     // set the generator
-    void gen(const std::mt19937 & gen);
+    void gen(const boost::mt19937 & gen);
 
     // generate random uniform between [0,1)
     double runif_01();
