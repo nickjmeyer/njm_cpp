@@ -33,7 +33,7 @@ public:
     uint32_t seed() const;
 
     // get the generator
-    std::mt19937 & gen();
+    const std::mt19937 & gen() const;
 
     // set the generator
     void gen(const std::mt19937 & gen);

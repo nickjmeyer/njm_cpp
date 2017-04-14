@@ -26,7 +26,7 @@ uint32_t Rng::seed() const {
     return this->seed_;
 }
 
-std::mt19937 & Rng::gen() {
+const std::mt19937 & Rng::gen() const {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     return this->gen_;
 }
