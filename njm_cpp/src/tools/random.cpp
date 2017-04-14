@@ -53,6 +53,7 @@ double Rng::rnorm_01() {
         this->has_next_rnorm_ = true;
         this->next_rnorm_01_ = a * std::cos(6.28318530718 * u2);
         return a * std::sin(6.28318530718 * u2);
+    }
 }
 
 double Rng::rnorm(const double mu, const double sigma) {
