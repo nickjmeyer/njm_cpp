@@ -13,14 +13,18 @@ namespace tools {
 class Rng {
 private:
     std::mt19937 gen_;
-    std::uniform_real_distribution<double> dis_runif_01_;
-    std::normal_distribution<double> dis_rnorm_01_;
     uint32_t seed_;
+
+    std::uniform_real_distribution<double> dis_runif_01_;
+
+    double has_next_rnorm_;
+    double next_rnorm_01_;
 
     mutable std::mutex gen_mutex_;
 
 public:
     Rng();
+    Rng(const Rng & other) = delete;
 
     // set the random seed
     void seed(const uint32_t seed);

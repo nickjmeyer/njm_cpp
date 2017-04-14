@@ -8,15 +8,16 @@ namespace tools {
 
 
 Rng::Rng()
-    : gen_(0), seed_(0), dis_runif_01_(0., 1.), dis_rnorm_01_(0., 1.) {
+    : gen_(0), seed_(0), dis_runif_01_(0., 1.),
+      has_next_rnorm_(false), next_rnorm_01_(0.0) {
 }
 
 void Rng::seed(const uint32_t seed) {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    this->dis_runif_01_.reset();
-    this->dis_rnorm_01_.reset();
     this->seed_ = seed;
     this->gen_.seed(seed);
+    this->dis_runif_01_.reset();
+    this->has_next_rnorm_ = false;
 }
 
 
@@ -43,7 +44,15 @@ double Rng::runif_01() {
 
 double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
-    return this->dis_rnorm_01_(this->gen_);
+    if (this->has_next_rnorm_) {
+        return this->next_rnorm_01_;
+    } else {
+        const double u1(this->dis_runif_01_(this->gen_));
+        const double u2(this->dis_runif_01_(this->gen_));
+        const double a(std::sqrt(-2.0 * std::log(u1)));
+        this->has_next_rnorm_ = true;
+        this->next_rnorm_01_ = a * std::cos(6.28318530718 * u2);
+        return a * std::sin(6.28318530718 * u2);
 }
 
 double Rng::rnorm(const double mu, const double sigma) {
