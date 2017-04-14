@@ -45,6 +45,7 @@ double Rng::runif_01() {
 double Rng::rnorm_01() {
     std::lock_guard<std::mutex> lock(this->gen_mutex_);
     if (this->has_next_rnorm_) {
+        this->has_next_rnorm_ = false;
         return this->next_rnorm_01_;
     } else {
         const double u1(this->dis_runif_01_(this->gen_));
