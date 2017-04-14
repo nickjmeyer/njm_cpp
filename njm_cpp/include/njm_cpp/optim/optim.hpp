@@ -8,7 +8,9 @@
 namespace njm {
 namespace optim {
 
-enum ErrorCode {SUCCESS, CONTINUE, ERROR, NON_FINITE_PARAMETER};
+enum ErrorCode {SUCCESS, CONTINUE, ERROR,
+                NON_FINITE_PARAMETER, NAN_PARAMETER,
+                STARTING_NON_FINITE_PARAMETER, STARTING_NAN_PARAMETER};
 
 template <typename... Args>
 class Optim : public tools::RngClass {

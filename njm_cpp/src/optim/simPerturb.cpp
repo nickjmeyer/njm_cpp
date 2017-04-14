@@ -24,6 +24,14 @@ SimPerturb::SimPerturb(
 
 
 ErrorCode SimPerturb::step() {
+    if (std::any_of(this->par_.begin(), this->par_.end(),
+                    [](const double & x) { return std::isnan(x);})) {
+        return STARTING_NAN_PARAMETER;
+    } else if (std::any_of(this->par_.begin(), this->par_.end(),
+                    [](const double & x) { return !std::isfinite(x);})) {
+        return STARTING_NON_FINITE_PARAMETER;
+    }
+
     const double scale = this->c_ /
         std::pow(this->completed_steps_ + 1, this->t_);
 
@@ -71,6 +79,9 @@ ErrorCode SimPerturb::step() {
     }
 
     if (std::any_of(this->par_.begin(), this->par_.end(),
+                    [](const double & x) { return std::isnan(x);})) {
+        return NAN_PARAMETER;
+    } else if (std::any_of(this->par_.begin(), this->par_.end(),
                     [](const double & x) { return !std::isfinite(x);})) {
         return NON_FINITE_PARAMETER;
     } else if (step_size < this->min_step_size_) {
