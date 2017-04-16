@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <boost/dynamic_bitset.hpp>
+#include <cblas.h>
+#include <numeric>
+#include <glog/logging.h>
 
 namespace njm {
 namespace linalg {
@@ -28,8 +31,11 @@ void mult_b_to_a(std::vector<double> & a, const std::vector<double> & b);
 
 void mult_b_to_a(std::vector<double> & a, const double & b);
 
-double dot_a_and_b(const std::vector<double> & a,
-        const std::vector<double> & b);
+inline double dot_a_and_b(const std::vector<double> & a,
+        const std::vector<double> & b) {
+    CHECK_EQ(a.size(), b.size());
+    return cblas_ddot(a.size(), a.data(), 1, b.data(), 1);
+}
 
 std::vector<double> outer_a_and_b(const std::vector<double> & a,
         const std::vector<double> & b);
