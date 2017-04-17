@@ -62,7 +62,7 @@ set(NJM_CPP_SRCS
 
 add_library(njm_cpp ${NJM_CPP_SRCS})
 target_include_directories(njm_cpp PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(njm_cpp PRIVATE njm_cpp_boost njm_cpp_gsl njm_cpp_glog
+target_link_libraries(njm_cpp PUBLIC njm_cpp_boost njm_cpp_gsl njm_cpp_glog
   njm_cpp_blas)
 
 
