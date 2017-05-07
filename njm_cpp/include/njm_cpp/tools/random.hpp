@@ -53,6 +53,9 @@ public:
     // generate random uniform between [a,b)
     double runif(const double a, const double b);
 
+    // generate random exponetial with rate
+    double rexp(const double rate);
+
     // generate random uniform integer between [a,b)
     int rint(const int a, const int b);
 

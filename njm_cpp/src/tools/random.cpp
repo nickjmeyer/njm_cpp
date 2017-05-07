@@ -71,6 +71,11 @@ double Rng::runif(const double a, const double b) {
     return this->runif_01() * (b - a) + a;
 }
 
+double Rng::rexp(const double rate) {
+    CHECK_GT(rate, 0.0);
+    return - std::log(1.0 - this->runif_01()) / rate;
+}
+
 
 int Rng::rint(const int a, const int b) {
     CHECK_LT(a, b);
