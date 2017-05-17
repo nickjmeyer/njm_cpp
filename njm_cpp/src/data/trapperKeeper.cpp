@@ -226,7 +226,6 @@ void TrapperKeeper::flush_no_lock() {
         ofs << entry.retrieve_and_wipe();
         ofs.close();
     }
-    this->entries_.clear();
 }
 
 
