@@ -226,6 +226,7 @@ void TrapperKeeper::flush_no_lock() {
         ofs << entry.retrieve_and_wipe();
         ofs.close();
     }
+    std::cout << "Flushed: " << this->temp_ << std::endl;
 }
 
 
