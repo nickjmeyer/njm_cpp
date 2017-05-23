@@ -73,6 +73,7 @@ TrapperKeeper::TrapperKeeper(const std::string & name,
       temp_(boost::filesystem::temp_directory_path()
               / boost::filesystem::unique_path()),
       date_(time_stamp()),
+      data_dir_(this->temp_),
       wiped_(false),
       finished_(false) {
 
@@ -139,15 +140,14 @@ void TrapperKeeper::finished() {
             dest = new_path;
         }
 
-        std::cout << "Results: " << dest << std::endl;
-
+        this->data_dir_ = dest;
         this->finished_ = true;
         this->wipe_no_lock();
     }
 }
 
 
-void TrapperKeeper::copy_contents(const boost::filesystem::path & source,
+void trapperkeeper::copy_contents(const boost::filesystem::path & source,
         const boost::filesystem::path & dest) {
     if (!boost::filesystem::is_directory(dest)) {
         boost::filesystem::create_directory(dest);
@@ -166,7 +166,7 @@ void TrapperKeeper::copy_contents(const boost::filesystem::path & source,
 }
 
 
-const boost::filesystem::path & TrapperKeeper::root() const {
+const boost::filesystem::path & trapperkeeper::root() const {
     return this->root_;
 }
 
@@ -226,7 +226,10 @@ void TrapperKeeper::flush_no_lock() {
         ofs << entry.retrieve_and_wipe();
         ofs.close();
     }
-    std::cout << "Flushed: " << this->temp_ << std::endl;
+}
+
+void TrapperKeeper::print_data_dir() const {
+    std::cout << "Data directory: " << this->data_dir_ << std::endl;
 }
 
 

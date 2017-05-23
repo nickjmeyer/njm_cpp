@@ -56,6 +56,7 @@ protected:
     const boost::filesystem::path root_;
     const boost::filesystem::path temp_;
     const boost::filesystem::path date_;
+    boost::filesystem::path data_dir_;
 
     bool wiped_;
     bool finished_;
@@ -88,6 +89,8 @@ public:
     Entry * entry(const boost::filesystem::path & entry_path);
 
     void flush();
+
+    void print_data_dir() const;
 };
 
 
