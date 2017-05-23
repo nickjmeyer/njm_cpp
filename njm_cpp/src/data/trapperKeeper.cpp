@@ -147,7 +147,7 @@ void TrapperKeeper::finished() {
 }
 
 
-void trapperkeeper::copy_contents(const boost::filesystem::path & source,
+void TrapperKeeper::copy_contents(const boost::filesystem::path & source,
         const boost::filesystem::path & dest) {
     if (!boost::filesystem::is_directory(dest)) {
         boost::filesystem::create_directory(dest);
