@@ -166,7 +166,7 @@ void TrapperKeeper::copy_contents(const boost::filesystem::path & source,
 }
 
 
-const boost::filesystem::path & trapperkeeper::root() const {
+const boost::filesystem::path & TrapperKeeper::root() const {
     return this->root_;
 }
 
